@@ -115,7 +115,7 @@ trait CrudTrait
         }
 
 
-        return redirect()->route($this->route . '.index')->withErrors($messages);
+        return redirect()->route($this->prefix . '.index')->withErrors($messages);
     }
 
     public function grid()
@@ -134,7 +134,7 @@ trait CrudTrait
 
         $type = request()->input('type');
 
-        Excel::create($this->route, function($excel) {
+        Excel::create($this->prefix, function($excel) {
 
             $excel->sheet('Planilha 1', function($sheet) {
 
@@ -169,7 +169,7 @@ trait CrudTrait
         } catch (ModelNotFoundException $e) {
             $this->alerts->error(trans($this->langPrefix . 'message.not_found', compact('id')));
 
-            return redirect()->route($this->route . '.all');
+            return redirect()->route($this->prefix . '.all');
         }
     }
 

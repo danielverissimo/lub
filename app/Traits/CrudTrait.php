@@ -185,7 +185,7 @@ trait CrudTrait
         // Do we have any errors?
         if ($messages->isEmpty()) {
             flash('Operação realizada com sucesso!', 'success');
-            return redirect()->route($this->route . '.edit', $model->id);
+            return redirect()->route($this->prefix . '.edit', $model->id);
         }
 
         return redirect()->back()->withInput()->withErrors($messages);
@@ -198,7 +198,7 @@ trait CrudTrait
 
     protected function viewMake($view, array $params = array())
     {
-        $view = !str_contains($view, '::') ? $this->viewPrefix . $view : $view;
+        $view = !str_contains($view, '::') ? $this->prefix . '.' . $view : $view;
         return view($view, $params);
     }
 }

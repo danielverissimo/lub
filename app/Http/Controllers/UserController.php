@@ -19,20 +19,10 @@ class UserController extends Controller
     }
 
     protected $gridModel = User::class;
-
-    protected $threshold = 30;
-
     protected $users;
-
     protected $service;
 
-    protected $langPrefix = 'users/';
-
-    protected $viewPrefix = 'users/';
-
-    protected $uri = 'users';
-
-    protected $route = 'users';
+    protected $prefix = 'users';
 
     /**
      * Create a new controller instance.

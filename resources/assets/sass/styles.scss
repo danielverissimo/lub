@@ -1,0 +1,43 @@
+// Forms ======================================================================
+
+form .form-group {
+  border-bottom: 1px dashed lighten($border, 5%);
+  padding-bottom:4px;
+}
+
+.tab-content {
+  padding: 25px;
+  margin-bottom: 25px;
+}
+
+.panel.panel-tabs .panel-body .nav-tabs li:first-child {
+  padding-left: 15px;
+}
+
+// Grid Header Title
+.main-box .main-box-header {
+  padding: 10px 0px !important;
+}
+
+// Export Buttons Grid Header
+.no-border-radius{
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.border-radius {
+  border-bottom-right-radius: 5px !important;
+  border-top-right-radius: 5px !important;
+}
+
+// Alerts ======================================================================
+
+.alert {
+  margin-bottom: 7px !important;
+}
+
+// Selectize ======================================================================
+
+.selectize-input {
+  border: none;
+}

@@ -63,10 +63,14 @@ trait CrudTrait {
     public function grid()
     {
         $request = app()->make('request');
-        return $this->findFiltered()->paginate($request->per_page);
+
+        $model = $this->createModel();
+        $columns = $model->getGridColumns();
+
+        return [$columns, $this->findFiltered($columns)->paginate($request->per_page)];
     }
 
-    public function findFiltered(){
+    public function findFiltered($columns = null){
 
         $request = app()->make('request');
         $model = $this->createModel();
@@ -74,7 +78,6 @@ trait CrudTrait {
         $order_column = $request->order_column;
         if ( empty($order_column) ){
             $order_column = 'id';
-
         }
 
         $direction = $request->direction;
@@ -84,9 +87,8 @@ trait CrudTrait {
 
         return $model
             ->orderBy($order_column, $direction)
-            ->where(function($query) use ($request) {
+            ->where(function($query) use ($request, $columns) {
 
-                $columns = $this->createModel()->getGridColumns();
                 $filters = $request->filters;
 
                 if ( !empty($filters) ) {

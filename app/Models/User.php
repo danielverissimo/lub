@@ -2,23 +2,20 @@
 
 namespace App\Models;
 
+use App\Traits\ModelTrait;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, Notifiable;
+    use HasApiTokens, Notifiable, ModelTrait;
 
-    public static $gridColumns = [
+    protected $gridColumns = [
         'id' => 'ID',
         'name' => 'Nome',
         'email' => 'Email'
     ];
-
-    public function getGridColumns(){
-        return User::$gridColumns;
-    }
 
     /**
      * The attributes that are mass assignable.

@@ -55,12 +55,12 @@ class UserController extends Controller
     public function getGrid()
     {
 
-        $paginator = $this->grid();
+        list($columns, $paginator) = $this->grid();
 
         return response()
             ->json([
                 'model' => $paginator,
-                'columns' => User::$gridColumns
+                'columns' => $columns
             ]);
     }
 

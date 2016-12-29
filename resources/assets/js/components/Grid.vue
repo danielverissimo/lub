@@ -53,8 +53,8 @@
                         <span class="fa fa-search"></span>
                     </button>
 
-                    <button class="btn btn-default" @click="fetchIndexData()">
-                        <i class="fa fa-refresh fa-sm"></i>
+                    <button class="btn btn-primary" type="submit" @click="addNew()">
+                        <span class="fa fa-plus-circle"></span>
                     </button>
 
                 </span>
@@ -224,6 +224,9 @@
 
                 }.bind(this));
 
+            },
+            addNew(){
+                window.location = this.source + '/create'
             },
             exportFile(type){
 

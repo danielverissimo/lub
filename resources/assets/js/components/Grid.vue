@@ -134,7 +134,7 @@
 
                 <nav>
                     <ul class="pagination pull-left" v-if="model.total > 0">
-                        <span>Mostrando <b>{{model.from}} - {{model.to}}</b> de <b>{{model.total}}</b></span>
+                        <span>Apresentando <b>{{model.from}} - {{model.to}}</b> de <b>{{model.total}}</b></span>
                     </ul>
                     <span v-else>
                         Nenhum Resultado Encontrado!

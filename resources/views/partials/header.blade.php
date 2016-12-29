@@ -29,7 +29,7 @@
 
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                         <i class="fa fa-user visible-xs-inline"></i>
-                        <span class="hidden-xs">User Email</span>
+                        <span class="hidden-xs">{{ Auth::user()->email }}</span>
                         <span class="caret" style="border-top-color:#484848;"></span>
                     </a>
 

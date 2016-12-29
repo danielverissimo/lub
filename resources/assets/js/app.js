@@ -30,3 +30,7 @@ Vue.component('passport-personal-access-tokens', require('./components/passport/
 const app = new Vue({
     el: '#app'
 });
+
+const trans2 = function(){
+    console.log('trans...');
+}

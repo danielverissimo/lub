@@ -47,22 +47,22 @@ trait CrudTrait
 
     public function create()
     {
-        return $this->showForm('create');
+        return $this->showForm('form');
     }
 
     public function store()
     {
-        return $this->processForm('create');
+        return $this->processForm('form');
     }
 
     public function edit($id)
     {
-        return $this->showForm('update', $id);
+        return $this->showForm('form', $id);
     }
 
     public function update($id)
     {
-        return $this->processForm('update', $id);
+        return $this->processForm('form', $id);
     }
 
     public function copy($id)

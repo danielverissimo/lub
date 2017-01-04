@@ -6,6 +6,7 @@
  */
 
 require('./bootstrap');
+require('./jquery.mask.min');
 require('./underscore/underscore-min');
 require('../centaurus/js/scripts');
 require('../centaurus/js/jquery.nanoscroller.min');
@@ -14,6 +15,8 @@ require('./sweetalert.min');
 require('./modernizr-custom');
 require('./notificationFx');
 require('./laravel-delete');
+require('./bootstrap-datepicker.min');
+require('./bootstrap-datepicker.pt-BR.min');
 require('./scripts');
 
 /**
@@ -23,6 +26,7 @@ require('./scripts');
  */
 
 Vue.component('grid', require('./components/Grid.vue'));
+Vue.component('grid-modal', require('./components/GridModal.vue'));
 Vue.component('passport-authorized-clients', require('./components/passport/AuthorizedClients.vue'));
 Vue.component('passport-clients', require('./components/passport/Clients.vue'));
 Vue.component('passport-personal-access-tokens', require('./components/passport/PersonalAccessTokens.vue'));
@@ -30,7 +34,3 @@ Vue.component('passport-personal-access-tokens', require('./components/passport/
 const app = new Vue({
     el: '#app'
 });
-
-const trans2 = function(){
-    console.log('trans...');
-}

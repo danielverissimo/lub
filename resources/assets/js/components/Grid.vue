@@ -3,7 +3,7 @@
 <div class="main-box-body clearfix">
 
     <header class="main-box-header clearfix">
-        <h2 class="pull-left">Usuários</h2>
+        <h2 class="pull-left">{{name}}</h2>
 
         <div class="filter-block pull-right">
 
@@ -178,7 +178,7 @@
 <script>
 
     export default{
-        props: ['source', 'token'],
+        props: ['source', 'token', 'name'],
         data(){
             return{
                 model: {

@@ -24,3 +24,7 @@ Route::get('/home', 'HomeController@index');
 Route::get('/users/grid', 'UserController@getGrid');
 Route::get('/users/export', 'UserController@export');
 Route::resource('/users', 'UserController');
+
+Route::get('/tweets/grid', 'TweetController@getGrid');
+Route::get('/tweets/export', 'TweetController@export');
+Route::resource('/tweets', 'TweetController');

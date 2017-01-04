@@ -21,5 +21,6 @@ elixir((mix) => {
     mix.copy('resources/assets/css/ns-default.css', 'public/build/css');
     mix.copy('resources/assets/css/ns-style-growl.css', 'public/build/css');
     mix.copy('resources/assets/css/ns-style-theme.css', 'public/build/css');
+    mix.copy('resources/assets/css/bootstrap-datepicker.min.css', 'public/build/css');
     mix.copy('node_modules/bootstrap-sass/assets/fonts/bootstrap/','public/build/fonts/bootstrap');
 });

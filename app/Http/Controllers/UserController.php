@@ -14,8 +14,6 @@ class UserController extends Controller
 
     use CrudTrait{
         store as storeFromTrait;
-        update as updateFromTrait;
-        grid as gridFromTrait;
     }
 
     protected $gridModel = User::class;
@@ -38,11 +36,11 @@ class UserController extends Controller
 
     }
 
-    public function index(){
-
-        $paginator = $this->service->listUsers();//\App\User::paginate(10);
-        return view('users.index')->with('paginator', $paginator)->with('items', $this->service->findAll());
-    }
+//    public function index(){
+//
+//        $paginator = $this->service->listUsers();//\App\User::paginate(10);
+//        return view('users.index')->with('paginator', $paginator)->with('items', $this->service->findAll());
+//    }
 
     public function store(){
 
@@ -50,18 +48,6 @@ class UserController extends Controller
         request()->merge($input);
         return $this->storeFromTrait($input);
 
-    }
-
-    public function getGrid()
-    {
-
-        list($columns, $paginator) = $this->grid();
-
-        return response()
-            ->json([
-                'model' => $paginator,
-                'columns' => $columns
-            ]);
     }
 
 }

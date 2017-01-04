@@ -171,6 +171,7 @@ return [
         Laracasts\Flash\FlashServiceProvider::class,
         'Maatwebsite\Excel\ExcelServiceProvider',
         Laravel\Passport\PassportServiceProvider::class,
+        Laralib\L5scaffold\GeneratorsServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -182,6 +183,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         App\Providers\UserServiceProvider::class,
+        App\Providers\TweetServiceProvider::class,
 
     ],
 

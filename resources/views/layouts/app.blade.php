@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{ url('build/css/ns-style-growl.css') }}">
     <link rel="stylesheet" href="{{ url('build/css/ns-default.css') }}">
     <link rel="stylesheet" href="{{ url('build/css/ns-style-theme.css') }}">
+    <link rel="stylesheet" href="{{ url('build/css/bootstrap-datepicker.min.css') }}">
 
     <!-- Scripts -->
     <script>
@@ -52,7 +53,7 @@
 </div>
 
 {{-- Modals --}}
-{{--@include('partials/modals')--}}
+@include('partials/modal-confirm')
 
 <!-- Scripts -->
 <script src="{{ elixir('js/app.js') }}"></script>

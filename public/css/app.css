@@ -19661,13 +19661,17 @@ svg {
 }
 
 form .form-group {
-  border-bottom: 1px dashed #eaeaea;
   padding-bottom: 4px;
 }
 
 .tab-content {
   padding: 25px;
   margin-bottom: 25px;
+}
+
+.tab-content.tab-bordered {
+  border: 1px solid #ddd;
+  border-top: none;
 }
 
 .panel.panel-tabs .panel-body .nav-tabs li:first-child {

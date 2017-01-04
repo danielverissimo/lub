@@ -34,15 +34,7 @@ trait CrudTrait
 
     public function index()
     {
-        $view = $this->viewMake('index');
-
-        if (!request()->ajax()) {
-            return $view;
-        }
-
-        $sections = $view->renderSections();
-
-        return $sections['styles'] . $sections['page'] . $sections['scripts'];
+        return $this->viewMake('index');
     }
 
     public function create()
@@ -116,6 +108,18 @@ trait CrudTrait
 
 
         return redirect()->route($this->prefix . '.index')->withErrors($messages);
+    }
+
+    public function getGrid()
+    {
+
+        list($columns, $paginator) = $this->grid();
+
+        return response()
+            ->json([
+                'model' => $paginator,
+                'columns' => $columns
+            ]);
     }
 
     public function grid()

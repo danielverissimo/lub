@@ -1,11 +1,9 @@
 @if ($errors->any())
-        @foreach($errors->all() as $error)
-            <div class="alert alert-danger alert-dismissible" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 
-                <strong>Erro!</strong> {!! $error !!}
-            </div>
-        @endforeach
+        <strong>Erro!</strong> Por favor, verifique os erros no formulário abaixo.
+    </div>
 @endif
 
 @if(Session::has('flash_notification.message'))

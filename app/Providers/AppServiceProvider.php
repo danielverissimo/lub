@@ -13,7 +13,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        \Collective\Html\FormFacade::macro('labelWithHTML', function ($name, $html) {
+            return '<label for="'.$name.'">'.$html.'</label>';
+        });
     }
 
     /**

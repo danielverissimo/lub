@@ -3,7 +3,9 @@
 /public/build
 /storage/*.key
 /vendor
+/packages
 /.idea
 Homestead.json
 Homestead.yaml
 .env
+.DS_Store

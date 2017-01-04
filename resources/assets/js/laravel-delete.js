@@ -61,7 +61,7 @@ $(function() {
             var form =
                 $('<form>', {
                     'method': 'POST',
-                    'action': link.attr('action')
+                    'action': link.data('action')
                 });
 
             var token =

@@ -85,7 +85,7 @@
                                         <tbody>
                                         <tr v-for="entry in model.data">
                                             <td v-for="column,key in columns" @click="modalSelectItem(entry)" data-dismiss="modal" style="cursor:pointer">
-                                                {{entry[key]}}
+                                                {{getValue(entry, key)}}
                                             </td>
                                         </tr>
                                         </tbody>
@@ -235,6 +235,12 @@
             modalSelectItem(item){
                 var fn = window[this.callback];
                 fn(item);
+            },
+            getValue(obj, path){
+                for (var i=0, path=path.split('.'), len=path.length; i<len; i++){
+                    obj = obj[path[i]];
+                };
+                return obj;
             }
         },
         created(){

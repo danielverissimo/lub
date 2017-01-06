@@ -109,7 +109,7 @@
                     <tbody>
                     <tr v-for="entry in model.data">
                         <td v-for="column,key in columns">
-                            {{entry[key]}}
+                            {{getValue(entry, key)}}
                         </td>
                         <td class="actions">
 
@@ -329,8 +329,13 @@
                     }
                 });
 
+            },
+            getValue(obj, path){
+                for (var i=0, path=path.split('.'), len=path.length; i<len; i++){
+                    obj = obj[path[i]];
+                };
+                return obj;
             }
-
         },
         created(){
             this.fetchIndexData();

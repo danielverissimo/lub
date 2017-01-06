@@ -79,7 +79,6 @@ trait CrudTrait
 
     public function destroy($id)
     {
-
         $messages = new MessageBag();
 
         try {
@@ -96,23 +95,14 @@ trait CrudTrait
             //$message = trans($this->langPrefix . 'message.' . $type . '.delete');
 
         } catch (QueryException $e) {
-
             $messages->add("error", 'Erro ao realizar esta operação!');
-
-            /*
-            $message = ($e->getCode() == 23000)
-                ? trans('firework/common::message.error.relation', ['id' => $id])
-                : trans($this->langPrefix . 'message.error.delete');
-            */
         }
-
 
         return redirect()->route($this->prefix . '.index')->withErrors($messages);
     }
 
     public function getGrid()
     {
-
         list($columns, $paginator) = $this->grid();
 
         return response()
@@ -124,31 +114,20 @@ trait CrudTrait
 
     public function grid()
     {
-        if (isset($this->service)) {
-            $layer = $this->service;
-        }else{
-            $layer = $this->items;
-        }
-
-        return $layer->grid();;
+        return $this->getLayer()->grid();;
     }
 
     public function export(){
-
 
         $type = request()->input('type');
 
         Excel::create($this->prefix, function($excel) {
 
-            $excel->sheet('Planilha 1', function($sheet) {
+            $excel->sheet('Sheet1', function($sheet) {
 
                 $filters = request()->input('filters');
 
-                if (isset($this->service)) {
-                    $layer = $this->service;
-                }else{
-                    $layer = $this->items;
-                }
+                $layer = $this->getLayer();
 
                 if ( !empty($filters) ){
                     $model = $layer->findFiltered()->get()->toArray();
@@ -179,12 +158,8 @@ trait CrudTrait
 
     protected function processForm($mode, $id = null)
     {
-        // Store the item
-        if (isset($this->service)) {
-            list($messages, $model) = $this->service->store($id, request()->all());
-        } else {
-            list($messages, $model) = $this->items->store($id, request()->all());
-        }
+        $layer = $this->getLayer();
+        list($messages, $model) = $layer->store($id, request()->all());
 
         // Do we have any errors?
         if ($messages->isEmpty()) {

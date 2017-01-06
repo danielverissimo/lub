@@ -5,7 +5,7 @@ use Illuminate\Container\Container;
 use Illuminate\Database\Eloquent\Model;
 use ReflectionException;
 
-trait CrudTrait {
+trait RepositoryCrudTrait {
 
 	use Traits\ContainerTrait, Traits\RepositoryTrait;
 
@@ -63,11 +63,19 @@ trait CrudTrait {
     public function grid()
     {
         $request = app()->make('request');
-
         $model = $this->createModel();
         $columns = $model->getGridColumns();
 
-        return [$columns, $this->findFiltered($columns)->paginate($request->per_page)];
+        $result = $this->findFiltered($columns)->paginate($request->per_page);
+        $this->loadRelationships($result, $model->getRelationsLoading());
+
+        return [$columns, $result];
+    }
+
+    public function loadRelationships($model, $relations = null){
+        if ( $relations ) {
+            $model->load($relations);
+        }
     }
 
     public function findFiltered($columns = null){
@@ -85,35 +93,43 @@ trait CrudTrait {
             $direction = 'desc';
         }
 
-        return $model
-            ->orderBy($order_column, $direction)
-            ->where(function($query) use ($request, $columns) {
+        $result = $model
+                    ->orderBy($order_column, $direction)
+                    ->where(function($query) use ($request, $columns) {
 
-                $filters = $request->filters;
+                        $filters = $request->filters;
 
-                if ( !empty($filters) ) {
+                        if ( !empty($filters) ) {
 
-                    foreach ($columns as $key => $column) {
+                            foreach ($columns as $key => $column) {
 
-                        $columnKey = $key;
+                                $columnKey = $key;
 
-                        $index = 0;
-                        foreach ($filters as $key => $filter) {
+                                // Remove relationship columns
+                                // TODO Create query to filter in relationships
+                                if ( strpos($columnKey, '.') === false ) {
 
-                            if ( $index == 0 ) {
-                                $query->orWhere($columnKey, 'like', '%' . $filter . '%');
-                            }else{
-                                $query->where($columnKey, 'like', '%' . $filter . '%');
+                                    $index = 0;
+                                    foreach ($filters as $key => $filter) {
+
+                                        if ($index == 0) {
+                                            $query->orWhere($columnKey, 'like', '%' . $filter . '%');
+                                        } else {
+                                            $query->where($columnKey, 'like', '%' . $filter . '%');
+                                        }
+
+                                        $index++;
+                                    }
+                                }
+
                             }
 
-                            $index++;
                         }
 
-                    }
+                    });
 
-                }
 
-            });
+        return $result;
     }
 
 	/**
@@ -123,13 +139,17 @@ trait CrudTrait {
 	{
 		return $this->container['cache']->rememberForever($this->getName().'.all', function()
 		{
-			return $this->createModel()->get();
+            $model = $this->createModel();
+            $this->loadRelationships($model, $model->getRelationsLoading());
+			return $model->get();
 		});
 	}
 
 	public function findAllPaginated()
 	{
-		return $this->createModel()->paginate(10);
+	    $model = $this->createModel();
+        $this->loadRelationships($model, $model->getRelationsLoading());
+		return $model->paginate(10);
 	}
 
 	/**
@@ -150,7 +170,9 @@ trait CrudTrait {
 
 		return $this->container['cache']->rememberForever($this->getName().'.'.$key, function() use ($id)
 		{
-			return $this->createModel()->find($id);
+		    $model = $this->createModel();
+            $this->loadRelationships($model, $model->getRelationsLoading());
+			return $model->find($id);
 		});
 	}
 
@@ -172,6 +194,8 @@ trait CrudTrait {
 		{
 			$item = $this->createModel();
 		}
+
+        $this->loadRelationships($item, $item->getRelationsLoading());
 
 		return compact('item', 'mode');
 	}

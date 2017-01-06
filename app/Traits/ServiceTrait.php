@@ -29,6 +29,15 @@ trait ServiceTrait
     }
 
     /**
+     * Return all entries paginated.
+     *
+     * @return Repository results
+     */
+    public function findAllPaginated(){
+        return $this->items->findAllPaginated();
+    }
+
+    /**
      * Return items filterede with param 'filters'
      *
      * @return mixed

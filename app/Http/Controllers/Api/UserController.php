@@ -25,6 +25,8 @@ class UserController extends Controller
     {
         $this->service = $service;
 
+        $this->middleware('auth:api');
+
     }
 
     public function getData()
@@ -37,12 +39,6 @@ class UserController extends Controller
         return response()
             ->json([
                 'model' => $paginator,
-                'columns' => $columns
-            ]);
-
-        return response()
-            ->json([
-                'model' => $model,
                 'columns' => $columns
             ]);
     }

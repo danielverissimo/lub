@@ -3,9 +3,13 @@
 @section('content')
 
     <section class="panel panel-default panel-tabs">
-        {!! Form::model($item, ['url' => 'users', $item->id]) !!}
+        @if ($item->exists)
+            {!! Form::model($item, ['route' => ['users.update', $item->id], 'method' => 'PUT']) !!}
+        @else
+            {!! Form::open(['url' => 'users']) !!}
+        @endif
 
-            @include('partials.header_form', ['submitButtonText' => 'Salvar', 'deleteButtonText' => 'Excluir'])
+            @include('partials.header_form', ['modelName' => 'Users'])
 
             <div class="panel-body">
 
@@ -19,7 +23,7 @@
                         </li>
                     </ul>
 
-                    <div class="tab-content">
+                    <div class="tab-content tab-bordered">
 
                         <div role="tabpanel" class="tab-pane fade in active" id="general">
 
@@ -46,6 +50,30 @@
                                 </div>
 
                             </fieldset>
+
+                        </div>
+
+                    </div>
+
+                    {{-- Form actions --}}
+                    <div class="row">
+
+                        <div class="col-lg-12">
+
+                            {{-- Form actions --}}
+                            <div class="form-group pull-right">
+
+                                <button class="btn btn-success" type="submit">Salvar</button>
+
+                                <a class="btn btn-default" href="{{{ url('/users') }}}">Cancelar</a>
+
+                                @if ($item->exists)
+                                    <a class="btn btn-danger" data-method="DELETE"
+                                       data-action="{{ url("users/{$item->id}") }}"
+                                       data-token="{{csrf_token()}}">Excluir</a>
+                                @endif
+
+                            </div>
 
                         </div>
 

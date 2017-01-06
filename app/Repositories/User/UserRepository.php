@@ -1,10 +1,11 @@
 <?php namespace App\Repositories\User;
 
 use App\Traits\Firework\CrudTrait;
+use App\Traits\Firework\RepositoryCrudTrait;
 
 class UserRepository implements UserRepositoryInterface {
 
-    use CrudTrait;
+    use RepositoryCrudTrait;
 
     public function listUsers(){
 

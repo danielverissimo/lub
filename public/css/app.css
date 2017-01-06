@@ -19692,6 +19692,10 @@ form .form-group {
   border-top-right-radius: 5px !important;
 }
 
+.navbar {
+  margin-bottom: 0px !important;
+}
+
 .alert {
   margin-bottom: 7px !important;
 }

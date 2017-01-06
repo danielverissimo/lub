@@ -12,4 +12,12 @@ trait ModelTrait
 
         return ['id' => 'ID'];
     }
+
+    public function getRelationsLoading(){
+
+        if ( property_exists($this, 'relationsLoading') ){
+            return $this->relationsLoading;
+        }
+        return null;
+    }
 }

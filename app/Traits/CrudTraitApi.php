@@ -1,5 +1,6 @@
 <?php namespace App\Traits;
 
+use Dotenv\Exception\ValidationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\MessageBag;
 use Maatwebsite\Excel\Facades\Excel;
@@ -61,12 +62,15 @@ trait CrudTraitApi
     /**
      * {@inheritDoc}
      */
-    public function store($id, array $input)
+    public function store($id = null)
     {
+        $messages = new MessageBag();
+
         $layer = $this->getLayer();
+        list($messages, $model) = $layer->store($id, request()->all());
 
-        list($messages, $model) = $this->service->store($id, request()->all());
-
+        return response()
+            ->json($model);
     }
 
     public function edit($id)
@@ -74,9 +78,21 @@ trait CrudTraitApi
 
     }
 
+    /**
+     * Update API model.
+     *
+     * @param $id
+     * @return mixed
+     */
     public function update($id)
     {
-        return $this->processForm('form', $id);
+        $messages = new MessageBag();
+
+        $layer = $this->getLayer();
+        list($messages, $model) = $layer->store($id, request()->all());
+
+        return response()
+            ->json($model);
     }
 
     public function destroy($id)
@@ -97,11 +113,9 @@ trait CrudTraitApi
             $messages->add("error", 'Erro ao realizar esta operação!');
         }
 
-        return response()
-            ->json([
-                'model' => $result,
-                'messages' => $messages->getMessages()
-            ]);
+        if ( $messages->any() ){
+            throw new \Exception("This element don't exists anymore.");
+        }
     }
 
 

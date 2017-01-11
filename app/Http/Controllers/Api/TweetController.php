@@ -24,5 +24,4 @@ class TweetController extends Controller
         $this->middleware('auth:api');
 
     }
-
 }

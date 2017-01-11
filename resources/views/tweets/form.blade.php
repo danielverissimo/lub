@@ -132,8 +132,13 @@
 
                                     </script>
 
-                                    <grid-modal source="{{url('/users')}}" token="{{csrf_token()}}" name="Users"
-                                                callback="modalSelectItem_User_id" id="grid-modal-user_id"></grid-modal>
+                                    <grid-modal
+                                            id="grid-modal-user_id"
+                                            source="{{url('/users')}}"
+                                            token="{{csrf_token()}}"
+                                            name="Users"
+                                            callback="modalSelectItem_User_id">
+                                    </grid-modal>
 
                                 </div>
                             </div>
@@ -147,6 +152,12 @@
                 <div class="row">
 
                     <div class="col-lg-12">
+
+                        <div class="form-group pull-left">
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#grid-modal-revision">
+                                <i class="fa fa-file-text-o"></i> Revisão
+                            </button>
+                        </div>
 
                         {{-- Form actions --}}
                         <div class="form-group pull-right">
@@ -169,6 +180,15 @@
             </div>
 
         </div>
+
+        <grid-modal
+                id="grid-modal-revision"
+                source="{{url('/revisions')}}"
+                token="{{csrf_token()}}"
+                name="Revisions"
+                style_modal="width: 1000px;"
+                class_filter="App\Models\Tweet">
+        </grid-modal>
 
         {!! Form::close() !!}
     </section>

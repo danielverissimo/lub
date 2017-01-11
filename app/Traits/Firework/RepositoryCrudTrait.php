@@ -4,6 +4,7 @@ use App\Traits;
 use Illuminate\Container\Container;
 use Illuminate\Database\Eloquent\Model;
 use ReflectionException;
+use Log;
 
 trait RepositoryCrudTrait {
 
@@ -129,6 +130,11 @@ trait RepositoryCrudTrait {
                     });
 
 
+        $class_filter = $request->class_filter;
+        if ( !empty($class_filter) ){
+            $result->where('revisionable_type', $class_filter);
+        }
+
         return $result;
     }
 
@@ -168,12 +174,14 @@ trait RepositoryCrudTrait {
 		// $key = is_array($id) ? 'array.'.implode($id) : $id;
 		$key = $id;
 
-		return $this->container['cache']->rememberForever($this->getName().'.'.$key, function() use ($id)
-		{
+		// TODO Check this cache rememberForever.
+
+//		return $this->container['cache']->rememberForever($this->getName().'.'.$key, function() use ($id)
+//		{
 		    $model = $this->createModel();
             $this->loadRelationships($model, $model->getRelationsLoading());
 			return $model->find($id);
-		});
+//		});
 	}
 
 	/**

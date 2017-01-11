@@ -20,6 +20,8 @@ Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 Route::get('/home', 'HomeController@index');
 
+Route::get('/revisions/grid', 'RevisionController@getGrid');
+
 // Users Route
 Route::get('/users/grid', 'UserController@getGrid');
 Route::get('/users/export', 'UserController@export');

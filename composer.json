@@ -12,7 +12,8 @@
         "laracasts/flash": "2.0.1",
         "maatwebsite/excel": "~2.1.0",
         "dompdf/dompdf": "~0.6.1",
-        "laravel/passport": "^1.0"
+        "laravel/passport": "^1.0",
+        "venturecraft/revisionable": "1.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

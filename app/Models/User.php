@@ -6,10 +6,11 @@ use App\Traits\ModelTrait;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Passport\HasApiTokens;
+use Venturecraft\Revisionable\RevisionableTrait;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, Notifiable, ModelTrait;
+    use HasApiTokens, Notifiable, ModelTrait, RevisionableTrait;
 
     protected $gridColumns = [
         'id' => 'ID',

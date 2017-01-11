@@ -5,6 +5,8 @@ namespace App\Exceptions;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -44,6 +46,37 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+
+        /**
+         * MethodNotAllowedHttpException has no message.
+         */
+        if ($request->isJson()  &&  $exception instanceof MethodNotAllowedHttpException) {
+            return response()->json([
+                'message' => 'Error',
+                'errors' => "MethodNotAllowedHttpException"
+            ], 422);
+        }
+
+        /**
+         * Validation REST error response.
+         */
+        if ($request->isJson()  &&  $exception instanceof ValidationException) {
+            return response()->json([
+                'message' => 'Validation Failed',
+                'errors' => $exception->validator->errors()
+            ], 422);
+        }
+
+        /**
+         * General exception.
+         */
+        if ($request->isJson()  &&  $exception instanceof \Exception) {
+            return response()->json([
+                'message' => 'Error',
+                'errors' => $exception->getMessage()
+            ], 422);
+        }
+
         return parent::render($request, $exception);
     }
 

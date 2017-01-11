@@ -7,24 +7,26 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Venturecraft\Revisionable\RevisionableTrait;
 
-class Tweet extends Model
+class Revision extends Model
 {
-    use ModelTrait, RevisionableTrait;
+    use ModelTrait;
 
     protected $gridColumns = [
         'id' => 'ID',
-        'user.name' => 'User'
+        'revisionable_type' => 'Revision Type',
+        'revisionable_id' => 'Revision',
+        'user.name' => 'User',
+        'key' => 'Key',
+        'old_value' => 'Old Value',
+        'new_value'=> 'New Value',
+        'updated_at' => 'Updated At'
     ];
 
     protected $relationsLoading = ['user'];
 
-    protected $fillable = ['title', 'body', 'count', 'date', 'user_id'];
+    protected $fillable = ['user_id'];
 
     public function user(){
         return $this->belongsTo(User::class );
-    }
-
-    public function setDateAttribute($date){
-        $this->attributes['date'] = Carbon::createFromFormat('d/m/Y', $date);
     }
 }

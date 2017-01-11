@@ -1,14 +1,13 @@
 <template>
 
     <div class="modal fade" :id="id" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog" :style="style_modal">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title">{{name}}</h4>
                 </div>
                 <div class="modal-body">
-
 
                     <div class="main-box-body clearfix">
 
@@ -21,7 +20,7 @@
                                     <span class="input-group-btn">
 
                                         <button class="btn btn-default no-border-radius" type="button">
-                                            Filtros
+                                            {{trans('grid.filters')}}
                                         </button>
 
                                     </span>
@@ -93,10 +92,10 @@
 
                                     <nav>
                                         <ul class="pagination pull-left" v-if="model.total > 0">
-                                            <span>Apresentando <b>{{model.from}} - {{model.to}}</b> de <b>{{model.total}}</b></span>
+                                            <span>{{trans('grid.show')}} <b>{{model.from}} - {{model.to}}</b> {{trans('grid.of')}} <b>{{model.total}}</b></span>
                                         </ul>
                                         <span v-else>
-                                            Nenhum Resultado Encontrado!
+                                            {{trans('grid.no_results_found')}}
                                         </span>
 
                                         <ul class="pagination pull-right" v-if="model.total > 0">
@@ -138,7 +137,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{trans('grid.close')}}</button>
                 </div>
             </div>
         </div>
@@ -150,7 +149,7 @@
 <script>
 
     export default{
-        props: ['source', 'token', 'name', 'callback', 'id'],
+        props: ['source', 'token', 'name', 'callback', 'id', 'style_modal', 'class_filter'],
         data(){
             return{
                 model: {
@@ -180,9 +179,14 @@
 
                 var vm = this
 
+                var classFilter = '';
+                if ( this.class_filter != null ){
+                    classFilter = '?class_filter=' + this.class_filter
+                }
+
                 $.ajax({
                     type: "GET",
-                    url: this.source + '/grid',
+                    url: this.source + '/grid' + classFilter,
                     data: {
                         page: vm.model.current_page,
                         order_column: vm.order_column,

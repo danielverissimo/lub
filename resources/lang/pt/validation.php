@@ -116,4 +116,6 @@ return [
 
     'attributes' => [],
 
+    'starts_with' => 'O campo :attribute deve iniciar com ":parameter0"'
+
 ];

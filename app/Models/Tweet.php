@@ -20,11 +20,21 @@ class Tweet extends Model
 
     protected $fillable = ['title', 'body', 'count', 'date', 'user_id'];
 
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'date'
+    ];
+
     public function user(){
         return $this->belongsTo(User::class );
     }
 
     public function setDateAttribute($date){
         $this->attributes['date'] = Carbon::createFromFormat('d/m/Y', $date);
+    }
+
+    public function getDateAttribute($date){
+        return Carbon::parse($date)->format('d/m/Y');
     }
 }

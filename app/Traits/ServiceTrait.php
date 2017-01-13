@@ -64,12 +64,9 @@ trait ServiceTrait
      */
     public function store($id, $input){
 
+        Validator::make($input, $this->rules(), $this->validationMessages())->validate();
+
         $messages = new MessageBag();
-
-        if ( isset($this->rules) ) {
-            Validator::make($input, $this->rules)->validate();
-        }
-
         return [$messages, $this->items->store($id, $input)];
     }
 
@@ -82,12 +79,9 @@ trait ServiceTrait
      */
     public function update($id, array $data){
 
+        Validator::make($data, $this->rules(), $this->validationMessages())->validate();
+
         $messages = new MessageBag();
-
-        if ( isset($this->rules) ) {
-            Validator::make($data, $this->rules)->validate();
-        }
-
         return [$messages, $this->items->update($id, $data)];
     }
 
@@ -103,6 +97,24 @@ trait ServiceTrait
 
     public function grid(){
         return $this->items->grid();
+    }
+
+    /**
+     * Get validations message or return empty array.
+     *
+     * @return array
+     */
+    public function validationMessages()
+    {
+        return isset($this->validationMessages) ? $this->validationMessages : [];
+    }
+
+    /**
+     * Ger rules var or return empty rules.
+     * @return array
+     */
+    public function rules(){
+        return isset($this->rules) ? $this->rules : [];
     }
 
 }

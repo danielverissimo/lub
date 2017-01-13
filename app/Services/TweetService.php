@@ -10,9 +10,11 @@ class TweetService implements TweetServiceInterface
     use ServiceTrait;
 
     public $rules = [
-        'title' => 'required',
-        'user_id' => 'required'
+        'user_id' => 'required',
+        'title'   => 'required|startsWith:t|lowercase'
     ];
+
+    const startsWithRule = 't';
 
     public function __construct(TweetRepositoryInterface $tweets)
     {

@@ -169,9 +169,10 @@ return [
 
         Collective\Html\HtmlServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
-        'Maatwebsite\Excel\ExcelServiceProvider',
+        Maatwebsite\Excel\ExcelServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class,
         Laralib\L5scaffold\GeneratorsServiceProvider::class,
+        KennedyTedesco\Validation\ValidationServiceProvider::class,
 
         /*
          * Application Service Providers...

@@ -14,7 +14,8 @@
         "dompdf/dompdf": "~0.6.1",
         "laravel/passport": "^1.0",
         "venturecraft/revisionable": "1.*",
-        "kennedytedesco/validation": "~3.0"
+        "kennedytedesco/validation": "~3.0",
+        "zizaco/entrust": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

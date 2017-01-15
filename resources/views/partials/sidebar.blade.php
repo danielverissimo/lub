@@ -28,6 +28,16 @@
                     </a>
                     <ul class="submenu">
                         <li>
+                            <a href="{{ url('/roles') }}">
+                                Funções
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ url('/permissions') }}">
+                                Permissões
+                            </a>
+                        </li>
+                        <li>
                             <a href="{{ url('/users') }}">
                                 Usuário
                             </a>

@@ -36,11 +36,12 @@ class UserController extends Controller
 
     }
 
-//    public function index(){
-//
-//        $paginator = $this->service->listUsers();//\App\User::paginate(10);
-//        return view('users.index')->with('paginator', $paginator)->with('items', $this->service->findAll());
-//    }
+    /*
+    public function index(){
+        $paginator = $this->service->listUsers();//\App\User::paginate(10);
+        return view('users.index')->with('paginator', $paginator)->with('items', $this->service->findAll());
+    }
+    */
 
     public function store(){
 
@@ -50,4 +51,35 @@ class UserController extends Controller
 
     }
 
+    public function roles($userId)
+    {
+        $user = $this->service->find($userId);
+
+        return response()
+            ->json([
+                'model' => $user->roles
+            ]);
+    }
+
+    public function addUserRole($userId)
+    {
+        $user = $this->service->find($userId);
+        $user->roles()->attach(Input::get('roles'));
+
+        return response()
+            ->json([
+                'model' => $user->roles
+            ]);
+    }
+
+    public function removeUserRole($userId)
+    {
+        $user = $this->service->find($userId);
+        $user->roles()->detach(Input::get('roles'));
+
+        return response()
+            ->json([
+                'model' => $user->roles
+            ]);
+    }
 }

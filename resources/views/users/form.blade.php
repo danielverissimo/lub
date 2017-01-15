@@ -21,6 +21,12 @@
                                 Usuário
                             </a>
                         </li>
+
+                        <li class="" role="roles">
+                            <a href="#roles" aria-controls="roles" role="tab" data-toggle="tab">
+                                Funções
+                            </a>
+                        </li>
                     </ul>
 
                     <div class="tab-content tab-bordered">
@@ -48,6 +54,24 @@
                                     @endif
 
                                 </div>
+
+                            </fieldset>
+
+                        </div>
+
+                        <div role="tabpanel" class="tab-pane fade" id="roles">
+
+                            <fieldset>
+
+                                <grid-relation
+                                        path="users"
+                                        relation="roles"
+                                        model_id="{{$item->id}}"
+                                        column="display_name"
+                                        name="Função"
+                                        model_name="Funções"
+                                        token="{{csrf_token()}}">
+                                </grid-relation>
 
                             </fieldset>
 

@@ -173,6 +173,7 @@ return [
         Laravel\Passport\PassportServiceProvider::class,
         Laralib\L5scaffold\GeneratorsServiceProvider::class,
         KennedyTedesco\Validation\ValidationServiceProvider::class,
+        Zizaco\Entrust\EntrustServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -186,7 +187,8 @@ return [
         App\Providers\RevisionServiceProvider::class,
         App\Providers\UserServiceProvider::class,
         App\Providers\TweetServiceProvider::class,
-
+        App\Providers\RoleServiceProvider::class,
+        App\Providers\PermissionServiceProvider::class,
     ],
 
     /*
@@ -237,6 +239,7 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'Excel' => 'Maatwebsite\Excel\Facades\Excel',
+        'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
     ],
 
 ];

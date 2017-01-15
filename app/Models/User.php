@@ -2,16 +2,21 @@
 
 namespace App\Models;
 
+use App\Notifications\ResetPassword as ResetPasswordNotification;
 use App\Traits\ModelTrait;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 use Venturecraft\Revisionable\RevisionableTrait;
-use App\Notifications\ResetPassword as ResetPasswordNotification;
+use Zizaco\Entrust\Traits\EntrustUserTrait;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, Notifiable, ModelTrait, RevisionableTrait;
+    use HasApiTokens, Notifiable, ModelTrait;
+
+    use RevisionableTrait, EntrustUserTrait {
+        EntrustUserTrait::boot insteadof RevisionableTrait;
+    }
 
     protected $gridColumns = [
         'id' => 'ID',
@@ -47,4 +52,9 @@ class User extends Authenticatable
     {
         $this->notify(new ResetPasswordNotification($token));
     }
+
+    public function roles(){
+        return $this->belongsToMany('App\Models\Role');
+    }
+
 }

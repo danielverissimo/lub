@@ -186,7 +186,7 @@
 
                 $.ajax({
                     type: "GET",
-                    url: this.source + '/grid' + classFilter,
+                    url: vm.source + '/grid' + classFilter,
                     data: {
                         page: vm.model.current_page,
                         order_column: vm.order_column,
@@ -237,8 +237,12 @@
 
             },
             modalSelectItem(item){
-                var fn = window[this.callback];
-                fn(item);
+                if ( this.callback ){
+                    var fn = window[this.callback];
+                    fn(item);
+                }else{
+                    this.$parent.itemSelected(item)
+                }
             },
             getValue(obj, path){
                 for (var i=0, path=path.split('.'), len=path.length; i<len; i++){

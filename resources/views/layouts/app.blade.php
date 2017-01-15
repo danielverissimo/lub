@@ -68,11 +68,11 @@
 
         @if (Session::has('flash_notification.message'))
             swal({
-            title: "{{ Session::get('flash_notification.title') }}",
-            type:  "{{ Session::get('flash_notification.level') }}",
-            text:  "{{ Session::get('flash_notification.message') }}",
-            timer: 1000
-        });
+                title: "{{ Session::get('flash_notification.title') }}",
+                type:  "{{ Session::get('flash_notification.level') }}",
+                text:  "{{ Session::get('flash_notification.message') }}",
+                timer: 1000
+            });
         @endif
     });
 </script>

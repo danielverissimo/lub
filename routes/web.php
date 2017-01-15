@@ -25,8 +25,24 @@ Route::get('/revisions/grid', 'RevisionController@getGrid');
 // Users Route
 Route::get('/users/grid', 'UserController@getGrid');
 Route::get('/users/export', 'UserController@export');
+Route::get('/users/{user_id}/roles', 'UserController@roles');
+Route::delete('/users/{user_id}/roles', 'UserController@removeUserRole');
+Route::post('/users/{user_id}/roles', 'UserController@addUserRole');
 Route::resource('/users', 'UserController');
 
 Route::get('/tweets/grid', 'TweetController@getGrid');
 Route::get('/tweets/export', 'TweetController@export');
 Route::resource('/tweets', 'TweetController');
+
+// Role Route
+Route::get('/roles/grid', 'RoleController@getGrid');
+Route::get('/roles/export', 'RoleController@export');
+Route::get('/roles/{role_id}/permissions', 'RoleController@permissions');
+Route::delete('/roles/{role_id}/permissions', 'RoleController@removeRolePermission');
+Route::post('/roles/{role_id}/permissions', 'RoleController@addRolePermission');
+Route::resource('/roles', 'RoleController');
+
+// Permission Route
+Route::get('/permissions/grid', 'PermissionController@getGrid');
+Route::get('/permissions/export', 'PermissionController@export');
+Route::resource('/permissions', 'PermissionController');

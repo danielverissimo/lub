@@ -64,7 +64,8 @@ trait ServiceTrait
      */
     public function store($id, $input){
 
-        Validator::make($input, $this->rules(), $this->validationMessages())->validate();
+        $rules = $this->replaceRulesColumn($id, $this->rules());
+        Validator::make($input, $rules, $this->validationMessages())->validate();
 
         $messages = new MessageBag();
         return [$messages, $this->items->store($id, $input)];
@@ -79,7 +80,8 @@ trait ServiceTrait
      */
     public function update($id, array $data){
 
-        Validator::make($data, $this->rules(), $this->validationMessages())->validate();
+        $rules = $this->replaceRulesColumn($id, $this->rules());
+        Validator::make($data, $rules, $this->validationMessages())->validate();
 
         $messages = new MessageBag();
         return [$messages, $this->items->update($id, $data)];
@@ -117,4 +119,18 @@ trait ServiceTrait
         return isset($this->rules) ? $this->rules : [];
     }
 
+    /**
+     * Replace {id} string in role to current id model.
+     *
+     * @param $id
+     * @param $rules
+     * @return mixed
+     */
+    protected function replaceRulesColumn($id, $rules){
+        foreach ($rules as $key => $rule){
+            $rule = str_replace('{id}', $id, $rule);
+            $rules[$key] = $rule;
+        }
+        return $rules;
+    }
 }

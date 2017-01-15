@@ -76,7 +76,7 @@
                                             {!! Form::label('Date', 'Date:') !!}
                                             <div class="input-group">
                                                 <div style="position: relative">
-                                                    {{ Form::date('date', $item->date, $attributes = $errors->has('date') ? array('class'=>'form-control error date-picker mask', 'data-mask' => '00/00/0000') : array('class'=>'form-control date-picker mask', 'data-mask' => '00/00/0000')) }}
+                                                    {{ Form::text('date', $item->date, $attributes = $errors->has('date') ? array('class'=>'form-control error date-picker mask', 'data-mask' => '00/00/0000') : array('class'=>'form-control date-picker mask', 'data-mask' => '00/00/0000')) }}
                                                 </div>
                                                 @if ($errors->has('date'))
                                                     <span class="help-block">{{ $errors->first('date', ':message') }}</span>

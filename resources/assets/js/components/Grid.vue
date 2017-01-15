@@ -33,8 +33,6 @@
                         </li>
                     </ul>
 
-
-
                 </span>
 
                 <span class="input-group-btn">

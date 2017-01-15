@@ -114,7 +114,7 @@ trait CrudTrait
 
     public function grid()
     {
-        return $this->getLayer()->grid();;
+        return $this->getLayer()->grid();
     }
 
     public function export(){

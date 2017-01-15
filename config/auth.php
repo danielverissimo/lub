@@ -103,6 +103,11 @@ return [
             'table' => 'password_resets',
             'expire' => 60,
         ],
+        'users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\User::class,
+            'table' => 'users',
+        ],
     ],
 
 ];

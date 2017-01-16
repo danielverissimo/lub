@@ -4,6 +4,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\MessageBag;
 use Maatwebsite\Excel\Facades\Excel;
 use Response;
+use Zizaco\Entrust\EntrustFacade;
 
 trait CrudTrait
 {
@@ -34,11 +35,21 @@ trait CrudTrait
 
     public function index()
     {
+        if ( !EntrustFacade::can($this->prefix . '.index') && env('CHECK_PERMISSION') ) {
+            flash('Você não tem permissão para acessar esta área!', 'danger');
+            return view('home');
+        }
+
         return $this->viewMake('index');
     }
 
     public function create()
     {
+        if ( !EntrustFacade::can($this->prefix . '.create') && env('CHECK_PERMISSION')) {
+            flash('Você não tem permissão para acessar esta área!', 'danger');
+            return view('home');
+        }
+
         return $this->showForm('form');
     }
 
@@ -49,6 +60,11 @@ trait CrudTrait
 
     public function edit($id)
     {
+        if ( !EntrustFacade::can($this->prefix . '.edit') && env('CHECK_PERMISSION') ) {
+            flash('Você não tem permissão para acessar esta área!', 'danger');
+            return view('home');
+        }
+
         return $this->showForm('form', $id);
     }
 
@@ -59,6 +75,11 @@ trait CrudTrait
 
     public function copy($id)
     {
+        if ( !EntrustFacade::can($this->prefix . '.copy') && env('CHECK_PERMISSION') ) {
+            flash('Você não tem permissão para acessar esta área!', 'danger');
+            return view('home');
+        }
+
         return $this->showForm('copy', $id);
     }
 
